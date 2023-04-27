@@ -41,7 +41,7 @@ public class UIManager : Singleton<UIManager>
 
         welcomeMessageText.text = $"Great time {nameInputField.text} to play a {currentDayPeriod} Pinball game! {nextSunCondition} today starts at {nextSunConditionTime}";
 
-        await Task.Delay(2000);
+        await Task.Delay(1000);
         GameManager.OnGameStarted?.Invoke();
         UpdateUIElements();
     }

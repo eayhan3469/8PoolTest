@@ -468,6 +468,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370322711}
   m_CullTransparentMesh: 1
+--- !u!1 &444453339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444453340}
+  - component: {fileID: 444453342}
+  - component: {fileID: 444453341}
+  m_Layer: 0
+  m_Name: GameBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444453340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444453339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1534241911}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &444453341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444453339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d5e362048915e4a85a064b8878ed59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!68 &444453342
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444453339}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -7.05, y: -3.1}
+  - {x: -7.05, y: 3.1}
+  - {x: 7.05, y: 3.1}
+  - {x: 7.05, y: -3.1}
+  - {x: -7.05, y: -3.1}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +550,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -552,6 +624,22 @@ Transform:
   m_Father: {fileID: 1789018949}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &679153678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,10 +1412,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1534241911}
   - component: {fileID: 1534241910}
-  - component: {fileID: 1534241912}
-  - component: {fileID: 1534241913}
   m_Layer: 0
-  m_Name: GameBoard
+  m_Name: GameBoardModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1392,51 +1478,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1534241909}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.19, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 444453340}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &1534241912
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534241909}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.02, y: -0.9}
-  - {x: -2.02, y: 0.9}
-  - {x: 2.02, y: 0.9}
-  - {x: 2.02, y: -0.9}
-  - {x: -2.02, y: -0.9}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
---- !u!114 &1534241913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534241909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00d5e362048915e4a85a064b8878ed59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1630969326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1720,24 +1769,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96debd84acc75b346bc189e9d9d4bfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameBoard: {fileID: 1534241913}
-  ballPrefabs:
-  - {fileID: 100000, guid: 640ca4bdd51fe144c92f84869ed38b86, type: 3}
-  - {fileID: 100000, guid: 3a37232d1309fde41a4be547925d95a5, type: 3}
-  - {fileID: 100000, guid: b7d72080720b21640acdda5947bb0c8c, type: 3}
-  - {fileID: 100000, guid: 6c4faccc8f28d1f4f9c5df9b3b574b0d, type: 3}
-  - {fileID: 100000, guid: f62b8523c61552045984174069aaa3fc, type: 3}
-  - {fileID: 100000, guid: 2be6c1e3c7abe5641aaffcd99851ce79, type: 3}
-  - {fileID: 100000, guid: eed468e1149a474448da6a2aad140b94, type: 3}
-  - {fileID: 100000, guid: 735dcc8f0ff0e2640858b29a0e71d8cc, type: 3}
-  - {fileID: 100000, guid: 2cec02ba13cf00c4b9d9a3a3f66fefac, type: 3}
-  - {fileID: 100000, guid: 7badf29c8699cae42913fcc52133f2f6, type: 3}
-  - {fileID: 100000, guid: 863729df47221fc48bbc54050861a79d, type: 3}
-  - {fileID: 100000, guid: b03fd10a751322140ad28d574e0ce16d, type: 3}
-  - {fileID: 100000, guid: 86b74ed43f889e84fb57d70dba575ace, type: 3}
-  - {fileID: 100000, guid: f3eb3ad1c008dd14782b93a421e93596, type: 3}
-  - {fileID: 100000, guid: 81e8e685d19ac1240aacfa6d583c90ab, type: 3}
-  - {fileID: 100000, guid: 17f7a86b0130db74fa1e1aa66e3127ae, type: 3}
+  gameBoard: {fileID: 444453341}
+  ballMaterials:
+  - {fileID: 2100000, guid: 8cc2b025ccda83346ad105b7ef456779, type: 2}
+  - {fileID: 2100000, guid: b1b8b6a1924f0e541958f5f3c0f8aca5, type: 2}
+  - {fileID: 2100000, guid: e4e344c0eb86e2a4e943609b415db00a, type: 2}
+  - {fileID: 2100000, guid: 5b9eab9c7d244474989829165edfe900, type: 2}
+  - {fileID: 2100000, guid: a82b3c246c535c143849756fcf4cacc2, type: 2}
+  - {fileID: 2100000, guid: f9b0f1c7dc8bdc44fa2beab1a14b1dc4, type: 2}
+  - {fileID: 2100000, guid: 13ff31df56b8b1745bb663dcb361accd, type: 2}
+  - {fileID: 2100000, guid: bb3b3008af51c56448783fdd2c3045bd, type: 2}
+  - {fileID: 2100000, guid: c45b003771be722498854b1b83030b02, type: 2}
+  - {fileID: 2100000, guid: a260a30e2f2556e4fb72a36cde4408d1, type: 2}
+  - {fileID: 2100000, guid: 9d87bdf30f0c0174a914b5f3aaeec328, type: 2}
+  - {fileID: 2100000, guid: 32f6e8cce36be524395e9b3ea787a259, type: 2}
+  - {fileID: 2100000, guid: a342ca42b78d5bc49911f90c03228ca2, type: 2}
+  - {fileID: 2100000, guid: c24369514e9a13542a953eea0b4cd197, type: 2}
+  - {fileID: 2100000, guid: 97a36fe0242d31d4397e8b272635ebfb, type: 2}
+  - {fileID: 2100000, guid: 104645244d22f094fa356d2faa7b0bd1, type: 2}
+  ballPrefab: {fileID: 7433429956780186562, guid: d1aaead148ca7524bbf46d82c4d20ccb, type: 3}
 --- !u!1 &1789018948
 GameObject:
   m_ObjectHideFlags: 0
