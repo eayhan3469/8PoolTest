@@ -49,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     {
         _currentStatus = GameStatus.NotStarted;
         _balls = new List<Ball>();
+        Application.targetFrameRate = 60;
     }
 
     private void OnEnable()

@@ -1,4 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
@@ -45,11 +46,29 @@ public class Ball : MonoBehaviour, IPointerDownHandler
 
     private void SetPosition()
     {
-        //TODO: Balls won't spawn too close to other balls
         var maxCorner = gameManager.GameBoard.GetMaxCorner();
         var minCorner = gameManager.GameBoard.GetMinCorner();
+        Vector3 spawnPos = Vector3.zero;
 
-        transform.position = new Vector2(Random.Range(minCorner.x + spawnOffsetFromEdge, maxCorner.x - spawnOffsetFromEdge), Random.Range(minCorner.y + spawnOffsetFromEdge, maxCorner.y - spawnOffsetFromEdge));
+        for (int i = 0; i < 100; i++)
+        {
+            if (gameManager.Balls.Count < 1)
+            {
+                break;
+            }
+
+            spawnPos = new Vector2(Random.Range(minCorner.x + spawnOffsetFromEdge, maxCorner.x - spawnOffsetFromEdge), Random.Range(minCorner.y + spawnOffsetFromEdge, maxCorner.y - spawnOffsetFromEdge));
+            var intersectedBall =  gameManager.Balls.Where(b => Vector3.Distance(b.transform.position, spawnPos) < circleCollider2d.radius + 0.05f).FirstOrDefault();
+
+            if (intersectedBall == null)
+            {
+                transform.position = spawnPos;
+                transform.parent = gameManager.GameBoard.transform;
+                return;
+            }
+        }
+
+        transform.position = spawnPos;
         transform.parent = gameManager.GameBoard.transform;
     }
 
@@ -93,9 +112,10 @@ public class Ball : MonoBehaviour, IPointerDownHandler
         {
             transform.localScale -= Vector3.one * 0.01f;
             transform.position = Vector3.MoveTowards(transform.position, holePosition, Time.deltaTime * rigidbody2d.velocity.magnitude);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
+        Destroy(this, 0.2f);
         gameManager.Balls.Remove(this);
         gameManager.CheckGameIsFinished();
     }
