@@ -3,14 +3,14 @@ using UnityEngine;
 
 public static class LocationService
 {
-    private static LocationData defaultLocationData = new LocationData(36.7201600f, -4.4203400f);
+    private static LocationData defaultLocationData = new LocationData(41.0122f, -28.976f);
 
     public static async Task<LocationData> GetLocationData()
     {
+        Input.location.Start();
+
         if (!Input.location.isEnabledByUser)
             return defaultLocationData;
-
-        Input.location.Start();
 
         int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
