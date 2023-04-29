@@ -21,14 +21,28 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public int Score
+    {
+        get
+        {
+            return _score;
+        }
+        set
+        {
+            _score = value;
+        }
+    }
+
     public List<Ball> Balls => _balls;
     public GameBoard GameBoard => gameBoard;
     public List<Material> BallMaterials => ballMaterials;
 
-    public static Action OnGameStarted;
+    public Action OnGameStarted;
+    public Action<int> OnScoreUpdated;
 
     private GameStatus _currentStatus;
     private List<Ball> _balls;
+    private int _score = 0;
 
     private void Start()
     {

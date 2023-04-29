@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour, IPointerDownHandler
     [SerializeField] private float sizeFactor;
 
     public int Number { get; set; }
+    public bool HasCollided { get; set; }
 
     private GameManager gameManager;
     private Rigidbody2D rigidbody2d;
@@ -56,5 +57,31 @@ public class Ball : MonoBehaviour, IPointerDownHandler
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
         Vector2 force = randomDirection * 10f;
         rigidbody2d.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ball"))
+        {
+            HasCollided = true;
+
+            if (!collision.collider.GetComponent<Ball>().HasCollided)
+            {
+                gameManager.OnScoreUpdated?.Invoke(gameManager.Score++);
+            }
+        }
+
+        if (collision.collider.CompareTag("GameBoardEdge"))
+        {
+            gameManager.OnScoreUpdated?.Invoke(gameManager.Score++);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ball"))
+        {
+            HasCollided = false;
+        }
     }
 }
