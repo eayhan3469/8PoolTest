@@ -58,7 +58,7 @@ public class Ball : MonoBehaviour, IPointerDownHandler
             }
 
             spawnPos = new Vector2(Random.Range(minCorner.x + spawnOffsetFromEdge, maxCorner.x - spawnOffsetFromEdge), Random.Range(minCorner.y + spawnOffsetFromEdge, maxCorner.y - spawnOffsetFromEdge));
-            var intersectedBall =  gameManager.Balls.Where(b => Vector3.Distance(b.transform.position, spawnPos) < circleCollider2d.radius + 0.05f).FirstOrDefault();
+            var intersectedBall =  gameManager.Balls.Where(b => Vector3.Distance(b.transform.position, spawnPos) < circleCollider2d.radius + 0.5f).FirstOrDefault();
 
             if (intersectedBall == null)
             {
