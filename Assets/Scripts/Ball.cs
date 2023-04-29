@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private GameObject modelObject;
     [SerializeField] private float sizeFactor;
+    [SerializeField] private AudioClip hitSFX;
 
     public int Number { get; set; }
     public bool HasCollided { get; set; }
@@ -68,12 +69,14 @@ public class Ball : MonoBehaviour, IPointerDownHandler
             if (!collision.collider.GetComponent<Ball>().HasCollided)
             {
                 gameManager.OnScoreUpdated?.Invoke(gameManager.Score++);
+                SoundManager.Instance.PlaySoundEffect(hitSFX);
             }
         }
 
         if (collision.collider.CompareTag("GameBoardEdge"))
         {
-            gameManager.OnScoreUpdated?.Invoke(gameManager.Score++);
+            gameManager.OnScoreUpdated?.Invoke(gameManager.Score++); 
+            SoundManager.Instance.PlaySoundEffect(hitSFX);
         }
     }
 

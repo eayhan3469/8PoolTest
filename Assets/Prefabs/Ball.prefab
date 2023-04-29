@@ -169,3 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelObject: {fileID: 2624770327797238308}
   sizeFactor: 0.75
+  hitSFX: {fileID: 8300000, guid: 49d0898d41e325b40a8f7b27e8fb4f47, type: 3}

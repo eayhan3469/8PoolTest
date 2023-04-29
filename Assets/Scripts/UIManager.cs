@@ -3,6 +3,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -26,6 +27,11 @@ public class UIManager : Singleton<UIManager>
     public void OnStartButtonClicked()
     {
         UpdateWelcomeText();
+    }
+
+    public void OnRestartButtonClicked()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private async void UpdateWelcomeText()
