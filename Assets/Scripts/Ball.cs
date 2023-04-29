@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
@@ -75,7 +76,7 @@ public class Ball : MonoBehaviour, IPointerDownHandler
 
         if (collision.collider.CompareTag("GameBoardEdge"))
         {
-            gameManager.OnScoreUpdated?.Invoke(gameManager.Score++); 
+            gameManager.OnScoreUpdated?.Invoke(gameManager.Score++);
             SoundManager.Instance.PlaySoundEffect(hitSFX);
         }
     }
@@ -86,5 +87,28 @@ public class Ball : MonoBehaviour, IPointerDownHandler
         {
             HasCollided = false;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hole"))
+        {
+            circleCollider2d.enabled = false;
+            rigidbody2d.isKinematic = true;
+            StartCoroutine(GoToHole(collision.transform.position));
+        }
+    }
+
+    private IEnumerator GoToHole(Vector3 holePosition)
+    {
+        while (transform.localScale.x > 0)
+        {
+            transform.localScale -= Vector3.one * 0.01f;
+            transform.position = Vector3.MoveTowards(transform.position, holePosition, Time.deltaTime * rigidbody2d.velocity.magnitude);
+            yield return null;
+        }
+
+        gameManager.Balls.Remove(this);
+        gameManager.CheckGameIsFinished();
     }
 }

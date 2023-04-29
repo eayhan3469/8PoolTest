@@ -9,19 +9,24 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject gameCanvas;
+    [SerializeField] private GameObject gameplayPanel;
+    [SerializeField] private GameObject gameFinishPanel;
     [SerializeField] private TextMeshProUGUI welcomeMessageText;
     [SerializeField] private TMP_InputField nameInputField;
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreFinishText;
 
     void OnEnable()
     {
-        GameManager.Instance.OnScoreUpdated += UpdateScore;
+        GameManager.Instance.OnScoreUpdated += UpdateScoreTexts;
+        GameManager.Instance.OnGameFinished += UpdateUIElements;
     }
 
     void OnDisable()
     {
-        GameManager.Instance.OnScoreUpdated += UpdateScore;
+        GameManager.Instance.OnScoreUpdated -= UpdateScoreTexts;
+        GameManager.Instance.OnGameFinished -= UpdateUIElements;
     }
 
     public void OnStartButtonClicked()
@@ -68,11 +73,14 @@ public class UIManager : Singleton<UIManager>
     private void UpdateUIElements()
     {
         mainMenuCanvas.SetActive(GameManager.Instance.CurrentStatus == GameStatus.NotStarted);
-        gameCanvas.SetActive(GameManager.Instance.CurrentStatus == GameStatus.Started);
+        gameCanvas.SetActive(GameManager.Instance.CurrentStatus != GameStatus.NotStarted);
+        gameplayPanel.SetActive(GameManager.Instance.CurrentStatus == GameStatus.Started);
+        gameFinishPanel.SetActive(GameManager.Instance.CurrentStatus == GameStatus.Finished);
     }
 
-    private void UpdateScore(int score)
+    private void UpdateScoreTexts(int score)
     {
-        scoreText.text = score.ToString();
+        scoreText.text = String.Format("Score: {0}", score);
+        scoreFinishText.text = String.Format("Your Score Is : {0}", score);
     }
 }

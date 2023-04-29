@@ -11,11 +11,6 @@ public class SoundManager : Singleton<SoundManager>
         if (soundEffect == null)
             return;
 
-        //if (pitchOverride != 1)
-        //    sfxAudioSource.pitch = pitchOverride;
-        //else
-        //    sfxAudioSource.pitch = 0.5f + Random.Range(-0.1f, 0.1f);
-
         sfxAudioSource.PlayOneShot(soundEffect, 1f);
     }
 }

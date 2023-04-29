@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
     public List<Material> BallMaterials => ballMaterials;
 
     public Action OnGameStarted;
+    public Action OnGameFinished;
     public Action<int> OnScoreUpdated;
 
     private GameStatus _currentStatus;
@@ -60,11 +61,26 @@ public class GameManager : Singleton<GameManager>
         OnGameStarted -= GameStarted;
     }
 
+    public void CheckGameIsFinished()
+    {
+        if (_balls.Count == 0)
+        {
+            GameFinished();
+        }
+    }
+
     private void GameStarted()
     {
         _currentStatus = GameStatus.Started;
         gameBoard.Activate();
         CreateBalls();
+    }
+
+    private void GameFinished()
+    {
+        _currentStatus = GameStatus.Finished;
+        gameBoard.Deactivate();
+        OnGameFinished?.Invoke();
     }
 
     private void CreateBalls()
