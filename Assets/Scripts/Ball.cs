@@ -11,7 +11,6 @@ public class Ball : MonoBehaviour, IPointerDownHandler
     [SerializeField] private AudioClip hitSFX;
 
     public int Number { get; set; }
-    public bool HasCollided { get; set; }
 
     private GameManager gameManager;
     private Rigidbody2D rigidbody2d;
@@ -65,27 +64,16 @@ public class Ball : MonoBehaviour, IPointerDownHandler
     {
         if (collision.collider.CompareTag("Ball"))
         {
-            HasCollided = true;
-
-            if (!collision.collider.GetComponent<Ball>().HasCollided)
-            {
-                gameManager.OnScoreUpdated?.Invoke(gameManager.Score++);
-                SoundManager.Instance.PlaySoundEffect(hitSFX);
-            }
+            gameManager.Score++;
+            gameManager.OnScoreUpdated?.Invoke(gameManager.Score);
+            SoundManager.Instance.PlaySoundEffect(hitSFX);
         }
 
         if (collision.collider.CompareTag("GameBoardEdge"))
         {
-            gameManager.OnScoreUpdated?.Invoke(gameManager.Score++);
+            gameManager.Score += 2;
+            gameManager.OnScoreUpdated?.Invoke(gameManager.Score);
             SoundManager.Instance.PlaySoundEffect(hitSFX);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Ball"))
-        {
-            HasCollided = false;
         }
     }
 

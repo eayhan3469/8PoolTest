@@ -4,16 +4,21 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    [Header("Panels")]
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject gameCanvas;
     [SerializeField] private GameObject gameplayPanel;
     [SerializeField] private GameObject gameFinishPanel;
+
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI welcomeMessageText;
     [SerializeField] private TMP_InputField nameInputField;
-
+    [SerializeField] private Image loadingImage;
+    [SerializeField] private Button startButton;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI scoreFinishText;
 
@@ -31,6 +36,8 @@ public class UIManager : Singleton<UIManager>
 
     public void OnStartButtonClicked()
     {
+        startButton.gameObject.SetActive(false);
+        loadingImage.gameObject.SetActive(true);
         UpdateWelcomeText();
     }
 
@@ -46,9 +53,9 @@ public class UIManager : Singleton<UIManager>
         var currentTime = DateTime.UtcNow;
         var sunriseTime = DateTime.Parse(sunInfo.results.sunrise);
         var sunsetTime = DateTime.Parse(sunInfo.results.sunset);
-        var currentDayPeriod = "";
-        var nextSunCondition = "";
-        var nextSunConditionTime = "";
+        string currentDayPeriod;
+        string nextSunCondition;
+        string nextSunConditionTime;
 
         if (currentTime.TimeOfDay >= sunsetTime.TimeOfDay || currentTime.TimeOfDay < sunriseTime.TimeOfDay)
         {
@@ -80,7 +87,7 @@ public class UIManager : Singleton<UIManager>
 
     private void UpdateScoreTexts(int score)
     {
-        scoreText.text = String.Format("Score: {0}", score);
-        scoreFinishText.text = String.Format("Your Score Is : {0}", score);
+        scoreText.text = String.Format("Score: {0}", score / 2);
+        scoreFinishText.text = String.Format("Your Score Is : {0}", score / 2);
     }
 }
